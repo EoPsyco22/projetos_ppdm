@@ -13,7 +13,9 @@ class MeuCrachaApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'PPDM - Crachá Digital',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.green,
+        ),
         useMaterial3: true,
       ),
       home: const TelaCracha(),
@@ -30,7 +32,7 @@ class TelaCracha extends StatelessWidget {
       appBar: AppBar(
         title: const Text('PPDM - Identificação Estudantil'),
         centerTitle: true,
-        backgroundColor: Colors.indigo,
+        backgroundColor: Colors.green,
         foregroundColor: Colors.white,
       ),
       body: Center(
@@ -38,9 +40,16 @@ class TelaCracha extends StatelessWidget {
           width: 320,
           padding: const EdgeInsets.all(20.0),
           decoration: BoxDecoration(
-            color: Colors.indigo.shade50,
+            // Exercício 01: fundo verde claro
+            color: Colors.green.shade50,
             borderRadius: BorderRadius.circular(16.0),
-            border: Border.all(color: Colors.indigo, width: 2.0),
+
+            // Exercício 01: borda verde
+            border: Border.all(
+              color: Colors.green,
+              width: 2.0,
+            ),
+
             boxShadow: const [
               BoxShadow(
                 color: Colors.black12,
@@ -54,18 +63,25 @@ class TelaCracha extends StatelessWidget {
             children: [
               const CircleAvatar(
                 radius: 40,
-                backgroundColor: Colors.indigo,
-                child: Icon(Icons.person, size: 50, color: Colors.white),
+                backgroundColor: Colors.green,
+                child: Icon(
+                  Icons.person,
+                  size: 50,
+                  color: Colors.white,
+                ),
               ),
+
               const SizedBox(height: 12.0),
+
               const Text(
                 'Ana Silva Santos',
                 style: TextStyle(
                   fontSize: 22.0,
                   fontWeight: FontWeight.bold,
-                  color: Colors.indigo,
+                  color: Colors.green,
                 ),
               ),
+
               const Text(
                 'Desenvolvimento Mobile / PPDM',
                 style: TextStyle(
@@ -74,20 +90,41 @@ class TelaCracha extends StatelessWidget {
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              const Divider(height: 24, thickness: 1),
+
+              const Divider(
+                height: 24,
+                thickness: 1,
+              ),
+
+              // Ícone alterado para verde
               Row(
                 children: const [
-                  Icon(Icons.badge, color: Colors.indigo),
+                  Icon(
+                    Icons.badge,
+                    color: Colors.green,
+                  ),
                   SizedBox(width: 10),
-                  Text('RA: 2026109923', style: TextStyle(fontSize: 16)),
+                  Text(
+                    'RA: 2026109923',
+                    style: TextStyle(fontSize: 16),
+                  ),
                 ],
               ),
+
               const SizedBox(height: 8.0),
+
+              // Ícone alterado para verde
               Row(
                 children: const [
-                  Icon(Icons.email, color: Colors.indigo),
+                  Icon(
+                    Icons.email,
+                    color: Colors.green,
+                  ),
                   SizedBox(width: 10),
-                  Text('ana.silva@estudante.edu.br', style: TextStyle(fontSize: 14)),
+                  Text(
+                    'ana.silva@estudante.edu.br',
+                    style: TextStyle(fontSize: 14),
+                  ),
                 ],
               ),
             ],
@@ -96,4 +133,4 @@ class TelaCracha extends StatelessWidget {
       ),
     );
   }
-}py
+}
