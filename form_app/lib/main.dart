@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+
 import 'models/observacao.dart';
-import 'widgets/formulario_observacao.dart';
-import 'widgets/lista_observacoes.dart';
+import 'models/widgets/formulario_observacao.dart';
+import 'models/widgets/lista_observacoes.dart';
 
 void main() {
   runApp(const FormApp());
@@ -15,10 +16,7 @@ class FormApp extends StatelessWidget {
     return MaterialApp(
       title: 'Registro de Observações',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.teal,
-        useMaterial3: true,
-      ),
+      theme: ThemeData(primarySwatch: Colors.teal, useMaterial3: true),
       home: const HomePage(),
     );
   }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../models/observacao.dart';
+import '../observacao.dart';
 
 class FormularioObservacao extends StatefulWidget {
   final Function(Observacao) onAdicionar;
