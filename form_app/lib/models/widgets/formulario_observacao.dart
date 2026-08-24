@@ -4,7 +4,10 @@ import '../observacao.dart';
 class FormularioObservacao extends StatefulWidget {
   final Function(Observacao) onAdicionar;
 
-  const FormularioObservacao({super.key, required this.onAdicionar});
+  const FormularioObservacao({
+    super.key,
+    required this.onAdicionar,
+  });
 
   @override
   State<FormularioObservacao> createState() => _FormularioObservacaoState();
@@ -14,13 +17,33 @@ class _FormularioObservacaoState extends State<FormularioObservacao> {
   final _tituloController = TextEditingController();
   final _especieController = TextEditingController();
   final _localController = TextEditingController();
+  final _observadorController = TextEditingController();
+
+  // Exercício 01 - Limpar formulário
+  void _limparFormulario() {
+    _tituloController.clear();
+    _especieController.clear();
+    _localController.clear();
+    _observadorController.clear();
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Formulário limpo com sucesso!'),
+        backgroundColor: Colors.orange,
+      ),
+    );
+  }
 
   void _submeterFormulario() {
     final titulo = _tituloController.text.trim();
     final especie = _especieController.text.trim();
     final local = _localController.text.trim();
+    final observador = _observadorController.text.trim();
 
-    if (titulo.isEmpty || especie.isEmpty || local.isEmpty) {
+    if (titulo.isEmpty ||
+        especie.isEmpty ||
+        local.isEmpty ||
+        observador.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Por favor, preencha todos os campos!'),
@@ -34,15 +57,13 @@ class _FormularioObservacaoState extends State<FormularioObservacao> {
       titulo: titulo,
       especie: especie,
       local: local,
+      observador: observador,
       data: DateTime.now(),
     );
 
     widget.onAdicionar(novaObservacao);
 
-    // Limpa os campos após enviar
-    _tituloController.clear();
-    _especieController.clear();
-    _localController.clear();
+    _limparCampos();
 
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
@@ -52,11 +73,19 @@ class _FormularioObservacaoState extends State<FormularioObservacao> {
     );
   }
 
+  void _limparCampos() {
+    _tituloController.clear();
+    _especieController.clear();
+    _localController.clear();
+    _observadorController.clear();
+  }
+
   @override
   void dispose() {
     _tituloController.dispose();
     _especieController.dispose();
     _localController.dispose();
+    _observadorController.dispose();
     super.dispose();
   }
 
@@ -78,7 +107,9 @@ class _FormularioObservacaoState extends State<FormularioObservacao> {
                 color: Colors.teal,
               ),
             ),
+
             const SizedBox(height: 12),
+
             TextField(
               controller: _tituloController,
               decoration: const InputDecoration(
@@ -87,7 +118,9 @@ class _FormularioObservacaoState extends State<FormularioObservacao> {
                 prefixIcon: Icon(Icons.title),
               ),
             ),
+
             const SizedBox(height: 10),
+
             TextField(
               controller: _especieController,
               decoration: const InputDecoration(
@@ -96,7 +129,9 @@ class _FormularioObservacaoState extends State<FormularioObservacao> {
                 prefixIcon: Icon(Icons.pets),
               ),
             ),
+
             const SizedBox(height: 10),
+
             TextField(
               controller: _localController,
               decoration: const InputDecoration(
@@ -105,16 +140,52 @@ class _FormularioObservacaoState extends State<FormularioObservacao> {
                 prefixIcon: Icon(Icons.location_on),
               ),
             ),
-            const SizedBox(height: 16),
-            ElevatedButton.icon(
-              onPressed: _submeterFormulario,
-              icon: const Icon(Icons.add),
-              label: const Text('Cadastrar Observação'),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.teal,
-                foregroundColor: Colors.white,
-                padding: const EdgeInsets.symmetric(vertical: 12),
+
+            const SizedBox(height: 10),
+
+            // Exercício 02 - Campo Observador
+            TextField(
+              controller: _observadorController,
+              decoration: const InputDecoration(
+                labelText: 'Observador',
+                hintText: 'Nome de quem registrou',
+                border: OutlineInputBorder(),
+                prefixIcon: Icon(Icons.person),
               ),
+            ),
+
+            const SizedBox(height: 16),
+
+            Row(
+              children: [
+                // Exercício 01 - Botão Limpar
+                Expanded(
+                  child: OutlinedButton.icon(
+                    onPressed: _limparFormulario,
+                    icon: const Icon(Icons.clear),
+                    label: const Text('Limpar'),
+                    style: OutlinedButton.styleFrom(
+                      foregroundColor: Colors.orange,
+                      padding: const EdgeInsets.symmetric(vertical: 12),
+                    ),
+                  ),
+                ),
+
+                const SizedBox(width: 10),
+
+                Expanded(
+                  child: ElevatedButton.icon(
+                    onPressed: _submeterFormulario,
+                    icon: const Icon(Icons.add),
+                    label: const Text('Cadastrar'),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.teal,
+                      foregroundColor: Colors.white,
+                      padding: const EdgeInsets.symmetric(vertical: 12),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ],
         ),

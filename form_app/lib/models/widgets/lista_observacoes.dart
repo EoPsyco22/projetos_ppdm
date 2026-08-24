@@ -4,7 +4,10 @@ import '../observacao.dart';
 class ListaObservacoes extends StatelessWidget {
   final List<Observacao> observacoes;
 
-  const ListaObservacoes({super.key, required this.observacoes});
+  const ListaObservacoes({
+    super.key,
+    required this.observacoes,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +17,10 @@ class ListaObservacoes extends StatelessWidget {
           padding: EdgeInsets.all(20.0),
           child: Text(
             'Nenhuma observação cadastrada ainda.',
-            style: TextStyle(fontSize: 16, fontStyle: FontStyle.italic),
+            style: TextStyle(
+              fontSize: 16,
+              fontStyle: FontStyle.italic,
+            ),
           ),
         ),
       );
@@ -26,18 +32,39 @@ class ListaObservacoes extends StatelessWidget {
       itemCount: observacoes.length,
       itemBuilder: (ctx, index) {
         final obs = observacoes[index];
+
         return Card(
-          margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+          margin: const EdgeInsets.symmetric(
+            horizontal: 12,
+            vertical: 6,
+          ),
           child: ListTile(
             leading: CircleAvatar(
               backgroundColor: Colors.teal.shade100,
-              child: const Icon(Icons.remove_red_eye, color: Colors.teal),
+              child: const Icon(
+                Icons.remove_red_eye,
+                color: Colors.teal,
+              ),
             ),
-            title: Text(obs.titulo, style: const TextStyle(fontWeight: FontWeight.bold)),
-            subtitle: Text('${obs.especie} • ${obs.local}'),
+
+            title: Text(
+              obs.titulo,
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+
+            // Exercício 02 - Observador no subtítulo
+            subtitle: Text(
+              '${obs.especie} • ${obs.local}\nObservador: ${obs.observador}',
+            ),
+
             trailing: Text(
               '${obs.data.day}/${obs.data.month}/${obs.data.year}',
-              style: const TextStyle(fontSize: 12, color: Colors.grey),
+              style: const TextStyle(
+                fontSize: 12,
+                color: Colors.grey,
+              ),
             ),
           ),
         );
