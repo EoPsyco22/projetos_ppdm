@@ -1,134 +1,279 @@
 import 'package:flutter/material.dart';
+import 'widgets/bloco_estatistica.dart';
 
 void main() {
-  runApp(const MeuCrachaApp());
+  runApp(const MeuLayoutApp());
 }
 
-class MeuCrachaApp extends StatelessWidget {
-  const MeuCrachaApp({super.key});
+class MeuLayoutApp extends StatelessWidget {
+  const MeuLayoutApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'PPDM - Crachá Digital',
+      title: 'PPDM - Layout Widgets',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.green,
+          seedColor: Colors.teal,
         ),
         useMaterial3: true,
       ),
-      home: const TelaCracha(),
+      home: const TelaDashboard(),
     );
   }
 }
 
-class TelaCracha extends StatelessWidget {
-  const TelaCracha({super.key});
+class TelaDashboard extends StatelessWidget {
+  const TelaDashboard({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('PPDM - Identificação Estudantil'),
+        title: const Text('PPDM - Dashboard de Observacoes'),
         centerTitle: true,
-        backgroundColor: Colors.green,
+        backgroundColor: Colors.teal,
         foregroundColor: Colors.white,
       ),
-      body: Center(
-        child: Container(
-          width: 320,
-          padding: const EdgeInsets.all(20.0),
-          decoration: BoxDecoration(
-            // Exercício 01: fundo verde claro
-            color: Colors.green.shade50,
-            borderRadius: BorderRadius.circular(16.0),
 
-            // Exercício 01: borda verde
-            border: Border.all(
-              color: Colors.green,
-              width: 2.0,
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(16.0),
+
+        child: Column(
+          // EXERCICIO 02
+          // Alterado de CrossAxisAlignment.start
+          // para CrossAxisAlignment.center
+          crossAxisAlignment: CrossAxisAlignment.center,
+
+          children: [
+            const Text(
+              'Resumo das Observacoes',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
             ),
 
-            boxShadow: const [
-              BoxShadow(
-                color: Colors.black12,
-                blurRadius: 10,
-                offset: Offset(0, 4),
-              ),
-            ],
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const CircleAvatar(
-                radius: 40,
-                backgroundColor: Colors.green,
-                child: Icon(
-                  Icons.person,
-                  size: 50,
-                  color: Colors.white,
+            const SizedBox(height: 16.0),
+
+            // EXERCICIO 08
+            // GridView.count substituindo Row/Expanded
+            GridView.count(
+              crossAxisCount: 2,
+              crossAxisSpacing: 12,
+              mainAxisSpacing: 12,
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+
+              children: const [
+                // EXERCICIO 07
+                BlocoEstatistica(
+                  icone: Icons.flutter_dash,
+                  valor: '124',
+                  legenda: 'Aves Vistas',
+                  cor: Color(0xFFE0F2F1),
                 ),
-              ),
 
-              const SizedBox(height: 12.0),
-
-              const Text(
-                'Ana Silva Santos',
-                style: TextStyle(
-                  fontSize: 22.0,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.green,
+                BlocoEstatistica(
+                  icone: Icons.place,
+                  valor: '181',
+                  legenda: 'Locais Visitados',
+                  cor: Color(0xFFE0F2F1),
                 ),
-              ),
 
-              const Text(
-                'Desenvolvimento Mobile / PPDM',
-                style: TextStyle(
-                  fontSize: 14.0,
-                  color: Colors.grey,
-                  fontWeight: FontWeight.w500,
+                // EXERCICIO 01
+                BlocoEstatistica(
+                  icone: Icons.camera_alt,
+                  valor: '45',
+                  legenda: 'Fotos',
+                  cor: Color(0xFFE0F2F1),
                 ),
-              ),
 
-              const Divider(
-                height: 24,
-                thickness: 1,
-              ),
+                // Quarto card para completar a grade 2x2
+                BlocoEstatistica(
+                  icone: Icons.favorite,
+                  valor: '32',
+                  legenda: 'Favoritos',
+                  cor: Color(0xFFE0F2F1),
+                ),
+              ],
+            ),
 
-              // Ícone alterado para verde
-              Row(
-                children: const [
-                  Icon(
-                    Icons.badge,
-                    color: Colors.green,
+            const SizedBox(height: 24.0),
+
+            const Text(
+              'Destaque da Semana',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+
+            const SizedBox(height: 16.0),
+
+            // EXERCICIO 05
+            // Stack com dois selos sobrepostos
+            Stack(
+              clipBehavior: Clip.none,
+              children: [
+                // EXERCICIO 06
+                // Container substituido por Card
+                Card(
+                  elevation: 4,
+                  child: Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.all(20.0),
+
+                    child: Row(
+                      children: [
+                        const Icon(
+                          Icons.star,
+                          size: 48,
+                          color: Colors.amber,
+                        ),
+
+                        const SizedBox(width: 16),
+
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment:
+                                CrossAxisAlignment.start,
+                            children: const [
+                              Text(
+                                'Gaviao-Real',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+
+                              Text(
+                                'Avistado no Parque Central',
+                                style: TextStyle(
+                                  color: Colors.grey,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                  SizedBox(width: 10),
-                  Text(
-                    'RA: 2026109923',
-                    style: TextStyle(fontSize: 16),
+                ),
+
+                // Selo "Raro"
+                Positioned(
+                  top: -8,
+                  right: -8,
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 4,
+                    ),
+
+                    decoration: BoxDecoration(
+                      color: Colors.red,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+
+                    child: const Text(
+                      'Raro',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 10,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+
+                // EXERCICIO 05
+                // Segundo selo: Confirmado
+                Positioned(
+                  bottom: -8,
+                  left: -8,
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 4,
+                    ),
+
+                    decoration: BoxDecoration(
+                      color: Colors.green,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+
+                    child: const Text(
+                      'Confirmado',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 10,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+
+            const SizedBox(height: 32.0),
+
+            // EXERCICIO 03
+            const Text(
+              'Ultimos Registros',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+
+            const SizedBox(height: 16.0),
+
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(16.0),
+
+              decoration: BoxDecoration(
+                color: Colors.grey.shade100,
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(
+                  color: Colors.grey.shade300,
+                ),
+              ),
+
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+                children: [
+                  const Row(
+                    children: [
+                      Icon(
+                        Icons.list,
+                        color: Colors.teal,
+                        size: 30,
+                      ),
+
+                      SizedBox(width: 12),
+
+                      Text(
+                        'Visualizar registros recentes',
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  ElevatedButton(
+                    onPressed: () {},
+                    child: const Text('Ver'),
                   ),
                 ],
               ),
-
-              const SizedBox(height: 8.0),
-
-              // Ícone alterado para verde
-              Row(
-                children: const [
-                  Icon(
-                    Icons.email,
-                    color: Colors.green,
-                  ),
-                  SizedBox(width: 10),
-                  Text(
-                    'ana.silva@estudante.edu.br',
-                    style: TextStyle(fontSize: 14),
-                  ),
-                ],
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

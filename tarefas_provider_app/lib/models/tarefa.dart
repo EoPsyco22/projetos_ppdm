@@ -11,7 +11,7 @@ ass Tarefa {
 
   Map<String, dynamic> toMap() {
     return {
-      if (id != null) 'id': id,
+      'id': ?id,
       'titulo': titulo,
       'concluida': concluida ? 1 : 0,
     };
