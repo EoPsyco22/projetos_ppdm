@@ -8,24 +8,15 @@ class DesafioLista extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          "PPDM - Identificação Estudantil",
-        ),
+        title: const Text("PPDM - Identificação Estudantil"),
         centerTitle: true,
         backgroundColor: Colors.green,
         foregroundColor: Colors.white,
       ),
-
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20),
-
         child: const Column(
           children: [
-
-            // ==========================================
-            // ESTUDANTE 01
-            // ==========================================
-
             CartaoEstudante(
               nome: "Ana Silva Santos",
               curso: "Desenvolvimento Mobile / PPDM",
@@ -37,10 +28,6 @@ class DesafioLista extends StatelessWidget {
 
             SizedBox(height: 20),
 
-            // ==========================================
-            // ESTUDANTE 02
-            // ==========================================
-
             CartaoEstudante(
               nome: "Carlos Oliveira",
               curso: "Desenvolvimento Mobile / PPDM",
@@ -51,10 +38,6 @@ class DesafioLista extends StatelessWidget {
             ),
 
             SizedBox(height: 20),
-
-            // ==========================================
-            // ESTUDANTE 03
-            // ==========================================
 
             CartaoEstudante(
               nome: "Mariana Costa",
