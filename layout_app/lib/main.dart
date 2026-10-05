@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'widgets/bloco_estatistica.dart';
+// Importação do widget customizado criado no Exercício 07
+import 'widgets/bloco_estatistica.dart'; 
 
 void main() {
   runApp(const MeuLayoutApp());
@@ -14,9 +15,7 @@ class MeuLayoutApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'PPDM - Layout Widgets',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.teal,
-        ),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.teal),
         useMaterial3: true,
       ),
       home: const TelaDashboard(),
@@ -31,9 +30,7 @@ class TelaDashboard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'PPDM - Dashboard de Observações',
-        ),
+        title: const Text('PPDM - Dashboard de Observacoes'),
         centerTitle: true,
         backgroundColor: Colors.teal,
         foregroundColor: Colors.white,
@@ -41,212 +38,160 @@ class TelaDashboard extends StatelessWidget {
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
-          // EXERCÍCIO 02
-          crossAxisAlignment: CrossAxisAlignment.center,
+          // EXERCÍCIO 02: Alinhamento alterado de .start para .center
+          crossAxisAlignment: CrossAxisAlignment.center, 
           children: [
             const Text(
-              'Resumo das Observações',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
+              'Resumo das Observacoes',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
-
             const SizedBox(height: 16.0),
 
-            // EXERCÍCIO 08
-            // Grid 2x2 com 4 cards
-            GridView.count(
-              crossAxisCount: 2,
-              crossAxisSpacing: 12,
-              mainAxisSpacing: 12,
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              children: const [
-                BlocoEstatistica(
-                  icone: Icons.flutter_dash,
-                  numero: '124',
-                  legenda: 'Aves Vistas',
-                  cor: Colors.teal,
-                ),
-
-                BlocoEstatistica(
-                  icone: Icons.place,
-                  numero: '181',
-                  legenda: 'Locais Visitados',
-                  cor: Colors.teal,
-                ),
-
-                // EXERCÍCIO 01
-                BlocoEstatistica(
-                  icone: Icons.camera_alt,
-                  numero: '45',
-                  legenda: 'Fotos',
-                  cor: Colors.teal,
-                ),
-
-                BlocoEstatistica(
-                  icone: Icons.visibility,
-                  numero: '89',
-                  legenda: 'Observações',
-                  cor: Colors.teal,
-                ),
-              ],
+            // EXERCÍCIO 08: Refatorado de Row/Expanded para GridView 2x2
+            // EXERCÍCIO 01: Adicionado o terceiro card ("Fotos")
+            // Adicionado também um quarto card simulado para fechar o Grid 2x2 perfeitamente
+            SizedBox(
+              height: 240, // Altura limite necessária para o GridView dentro do ScrollView
+              child: GridView.count(
+                crossAxisCount: 2,
+                crossAxisSpacing: 12.0,
+                mainAxisSpacing: 12.0,
+                childAspectRatio: 1.3,
+                physics: const NeverScrollableScrollPhysics(), // Evita conflito de scroll
+                children: [
+                  BlocoEstatistica(
+                    icone: Icons.flutter_dash,
+                    valor: '124',
+                    legenda: 'Aves Vistas',
+                    corFundo: Colors.teal.shade100,
+                  ),
+                  BlocoEstatistica(
+                    icone: Icons.place,
+                    valor: '18',
+                    legenda: 'Locais Visitados',
+                    corFundo: Colors.teal.shade50,
+                  ),
+                  // CARD ADICIONADO NO EXERCÍCIO 01
+                  BlocoEstatistica(
+                    icone: Icons.camera_alt,
+                    valor: '45',
+                    legenda: 'Fotos',
+                    corFundo: Colors.teal.shade100,
+                  ),
+                  // CARD EXTRA para preencher a grade 2x2 do Exercício 08
+                  BlocoEstatistica(
+                    icone: Icons.assignment,
+                    valor: '5',
+                    legenda: 'Relatórios',
+                    corFundo: Colors.teal.shade50,
+                  ),
+                ],
+              ),
             ),
-
             const SizedBox(height: 24.0),
 
             const Text(
               'Destaque da Semana',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
-
             const SizedBox(height: 16.0),
 
-            // EXERCÍCIO 05
-            // Stack com dois selos
+            // SOBREPOSIÇÃO usando Stack
             Stack(
               clipBehavior: Clip.none,
               children: [
-                // EXERCÍCIO 06
-                // Container substituído por Card
+                // EXERCÍCIO 06: Substituído Container por Card com elevação 4
                 Card(
                   elevation: 4,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
                   child: Padding(
                     padding: const EdgeInsets.all(20.0),
                     child: Row(
                       children: [
-                        const Icon(
-                          Icons.star,
-                          size: 48,
-                          color: Colors.amber,
-                        ),
+                        const Icon(Icons.star, size: 48, color: Colors.amber),
                         const SizedBox(width: 16),
-
                         Column(
-                          crossAxisAlignment:
-                              CrossAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: const [
-                            Text(
-                              'Gavião-Real',
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Text(
-                              'Avistado no Parque Central',
-                              style: TextStyle(
-                                color: Colors.grey,
-                              ),
-                            ),
+                            Text('Gaviao-Real', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                            Text('Avistado no Parque Central', style: TextStyle(color: Colors.grey)),
                           ],
                         ),
                       ],
                     ),
                   ),
                 ),
-
-                // Selo Raro
+                // Selo superior direito (Original)
                 Positioned(
-                  top: -8,
-                  right: -8,
+                  top: -4,
+                  right: -4,
                   child: Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 8,
-                      vertical: 4,
-                    ),
+                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                     decoration: BoxDecoration(
                       color: Colors.red,
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: const Text(
                       'Raro',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 10,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),
-
-                // EXERCÍCIO 05
-                // Segundo selo: Confirmado
+                // EXERCÍCIO 05: Segundo selo na parte inferior esquerda com fundo verde
                 Positioned(
-                  bottom: -8,
-                  left: -8,
+                  bottom: -4,
+                  left: -4,
                   child: Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 8,
-                      vertical: 4,
-                    ),
+                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                     decoration: BoxDecoration(
                       color: Colors.green,
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: const Text(
                       'Confirmado',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 10,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),
               ],
             ),
+            const SizedBox(height: 24.0),
 
-            const SizedBox(height: 32.0),
-
-            // EXERCÍCIO 03
-            const Text(
-              'Últimos Registros',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
+            // EXERCÍCIO 03: Nova seção "Últimos Registros" com MainAxisAlignment.spaceBetween
+            const Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                'Ultimos Registros',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
             ),
-
             const SizedBox(height: 16.0),
-
             Container(
-              width: double.infinity,
-              padding: const EdgeInsets.all(16),
+              padding: const EdgeInsets.all(16.0),
               decoration: BoxDecoration(
-                color: Colors.teal.shade50,
+                color: Colors.grey.shade100,
                 borderRadius: BorderRadius.circular(12),
-                border: Border.all(
-                  color: Colors.teal.shade200,
-                ),
+                border: Border.all(color: Colors.grey.shade300),
               ),
               child: Row(
-                mainAxisAlignment:
-                    MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween, // Alinhamento das extremidades
                 children: [
                   Row(
                     children: const [
-                      Icon(
-                        Icons.list,
-                        color: Colors.teal,
-                      ),
-                      SizedBox(width: 10),
-                      Text(
-                        'Visualizar registros recentes',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
+                      Icon(Icons.list_alt, color: Colors.teal),
+                      SizedBox(width: 12),
+                      Text('Log_Avistamento_041.pdf', style: TextStyle(fontWeight: FontWeight.w500)),
                     ],
                   ),
-
                   ElevatedButton(
                     onPressed: () {},
-                    child: const Text('Ver todos'),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.teal,
+                      foregroundColor: Colors.white,
+                    ),
+                    child: const Text('Abrir'),
                   ),
                 ],
               ),
@@ -257,3 +202,4 @@ class TelaDashboard extends StatelessWidget {
     );
   }
 }
+

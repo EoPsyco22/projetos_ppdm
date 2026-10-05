@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 
 class BlocoEstatistica extends StatelessWidget {
   final IconData icone;
-  final String numero;
+  final String valor;
   final String legenda;
-  final Color cor;
+  final Color corFundo;
 
   const BlocoEstatistica({
     super.key,
     required this.icone,
-    required this.numero,
+    required this.valor,
     required this.legenda,
-    required this.cor,
+    required this.corFundo,
   });
 
   @override
@@ -19,38 +19,25 @@ class BlocoEstatistica extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16.0),
       decoration: BoxDecoration(
-        color: cor.withOpacity(0.1),
+        color: corFundo,
         borderRadius: BorderRadius.circular(12),
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(
-            icone,
-            size: 36,
-            color: cor,
-          ),
-
+          Icon(icone, size: 36, color: Colors.teal),
           const SizedBox(height: 8),
-
           Text(
-            numero,
-            style: const TextStyle(
-              fontSize: 22,
-              fontWeight: FontWeight.bold,
-            ),
+            valor,
+            style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
           ),
-
           Text(
             legenda,
-            style: const TextStyle(
-              fontSize: 12,
-              color: Colors.grey,
-            ),
-            textAlign: TextAlign.center,
+            style: const TextStyle(fontSize: 12, color: Colors.grey),
           ),
         ],
       ),
     );
   }
 }
+
